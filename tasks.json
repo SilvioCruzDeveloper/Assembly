@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "assemble",
+      "type": "shell",
+      "command": "nasm",
+      "args": [
+        "-f",
+        "win32",
+        "${file}",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.obj"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "link",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "${fileDirname}\\${fileBasenameNoExtension}.obj",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": "assemble"
+    }
+  ]
+}
